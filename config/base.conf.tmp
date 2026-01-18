@@ -1,0 +1,7 @@
+#!/bin/sh
+
+BASE="/path/to/your/SolarProbe/folder"
+NODES="$BASE/nodes"
+PROBES_CONF="$BASE/config/probes.conf"
+OUT="www/index.html"
+
