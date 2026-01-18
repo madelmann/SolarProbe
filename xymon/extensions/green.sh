@@ -1,6 +1,6 @@
 #!/bin/sh
 
-COLUMN=mytest	# Name of the column
+COLUMN=test 	# Name of the column
 COLOR=green		# By default, everything is OK
 MSG="Bad stuff status"
 
@@ -21,9 +21,11 @@ else
 fi
 
 # Tell Xymon about it
-echo "status $MACHINE.$COLUMN $COLOR $(date)
+#echo "$XYMON $XYMONSRV status $MACHINE.$COLUMN $COLOR $(date)
+#
+#${MSG}
+#"
 
-${MSG}
-"
+echo "$COLUMN $COLOR $(date)"
 
 exit 0
