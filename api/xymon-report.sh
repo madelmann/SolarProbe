@@ -1,5 +1,5 @@
 #!/bin/sh
-set -eu
+#set -eu
 
 . "config/base.conf"
 
@@ -28,7 +28,7 @@ echo "$BODY" | while read -r line; do
   [ -n "$probe" ] || continue
 
   dir="$NODES/$node"
-  mkdir -p "$dir"
+  mkdir -p "$dir/history/"
 
   echo "$(date) $BODY" >> "$NODES/$node/incoming.log"
 

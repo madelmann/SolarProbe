@@ -2,7 +2,7 @@
 # Wrapper to send Xymon extension output to probe server
 # Usage: xymon-post.sh <hostname> <probe-server-url> [extension ... args]
 
-set -eu
+#set -eu
 
 if [ $# -lt 2 ]; then
   echo "Usage: $0 <hostname> <server-url> [extension ...]" >&2
@@ -29,8 +29,7 @@ done)
 # Send to probe server
 curl -s -X POST "$SERVER" \
      -H "Content-Type: text/plain" \
-     --data-binary "$PAYLOAD" \
-     -v
+     --data-binary "$PAYLOAD"
 
 # Exit code of the extension (optional: propagate)
 exit 0

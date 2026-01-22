@@ -43,7 +43,7 @@ cat > "$OUT" <<EOF
 <head>
 <meta charset="utf-8">
 <meta http-equiv="refresh" content="30">
-<title>Probe Status</title>
+<title>SolarProbe</title>
 <style>
 body { font-family: sans-serif; background:#111; color:#eee; }
 table { border-collapse: collapse; }
@@ -58,7 +58,7 @@ td.node { text-align: left; font-weight: bold; }
 </style>
 </head>
 <body>
-<h1>Probe Status</h1>
+<h1>SolarProbe</h1>
 <p class="small">Updated: $(date)</p>
 <table border="1">
 <tr>
@@ -78,8 +78,9 @@ echo "</tr>" >> "$OUT"
 for nodepath in "$NODES"/*; do
   [ -d "$nodepath" ] || continue
   node=$(basename "$nodepath")
+  ./render-node.sh "$node"
 
-  echo "<tr><td class=\"node\">$node</td>" >> "$OUT"
+  echo "<tr><td class=\"node\"><a href=\"nodes/$node.html\">$node</a></td>" >> "$OUT"
 
   while read -r probe; do
     [ -n "$probe" ] || continue
