@@ -1,9 +1,9 @@
-#!/bin/sh
-#set -eu
+#!/bin/bash
 
-. "config/base.conf"
+BASE_DIRECTORY=$(dirname "$0")
 
-TTL=300   # seconds before a probe turns blue
+source "${BASE_DIRECTORY}/config/base.conf"
+source "${BASE_DIRECTORY}/config/server.conf"
 
 now=$(date +%s)
 
@@ -68,7 +68,9 @@ EOF
 # --- column headers --------------------------------------------
 
 while read -r probe; do
+
   [ -n "$probe" ] && echo "<th>$probe</th>" >> "$OUT"
+
 done < "$PROBES_CONF"
 
 echo "</tr>" >> "$OUT"
