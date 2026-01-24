@@ -14,9 +14,9 @@ MSG_SHORT=""
 
 # Use input redirection instead of a pipe
 while read -r url; do
-    RESULT=$(curl -s -I "$url" | grep HTTP)
+    RESULT=$(curl -s -I "$url" | grep HTTP | grep 200)
 
-    if [ "$RESULT" != "200" ]; then
+    if [ "$RESULT" = "" ]; then
         COLOR=red
         MSG_SHORT="$RESULT"
     fi
