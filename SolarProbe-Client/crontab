@@ -1,1 +1,0 @@
-*/5 * * * *     /bin/bash -l -c '/var/lib/slang/library/SolarProbe-Client/client.sh'
