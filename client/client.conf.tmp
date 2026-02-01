@@ -1,2 +1,1 @@
-SERVER="${SERVER}"
-
+SERVER="${SERVER}/solarprobe/"
