@@ -1,6 +1,6 @@
 {
   "name": "Solarprobe - Client",
-  "name_short": "solarprobe-client",
+  "name_short": "SolarProbe-Client",
   "version": "0.1.0",
   "description": "Solarprobe is a monitoring tool which probes your servers and services and forwards the collected data to your SolarProbe server.",
   "dependencies": [
@@ -9,7 +9,7 @@
     { "module": "libScript", "version_min": "0.2.1" }
   ],
   "target": {
-    "directory": "solarprobe-client",
+    "directory": "SolarProbe-Client",
     "type": "internal"
   }
 }
