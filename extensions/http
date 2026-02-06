@@ -9,33 +9,39 @@ private string COLOR;
 private string DATE;
 private string MSG_SHORT;
 private string PROBE const = "http";
+private int    TIMESTAMP;
 
 
 public void Main( int argc, string args )
 {
     var params = new ParameterHandler( argc, args, false );
+    if ( params.empty() ) {
+        return;
+    }
 
-    COLOR = process( new String( new Scanner( params.directoryName() + "/http.hosts" ).getText() ) );
+    COLOR = probeURL( params[ 0 ].Key );
     DATE  = strftime( "%Y-%m-%d %H:%M:%S %Z" );
+    TIMESTAMP = time();
 
-    print( streval( "{{{PROBE}}} {{{COLOR}}} {{{DATE}}} {{{MSG_SHORT}}}" ) );
+    // print( streval( "{{{PROBE}}} {{{COLOR}}} {{{DATE}}} {{{MSG_SHORT}}}" ) );
+
+    print( streval( "state={{{COLOR}}}{{{LINEBREAK}}}timestamp={{{TIMESTAMP}}}{{{LINEBREAK}}}summary=\"{{{DATE}}} {{{MSG_SHORT}}}\"" ) );
 }
 
-private string process( String config )
+private string probeURL( string url )
 {
-    foreach ( string url : config.SplitBy( LINEBREAK ) ) {
-        if ( !url ) {
-            continue;
-        }
+    if ( !url ) {
+        return "";
+    }
 
-        var result = system( streval( "curl -s -I \"{{{url}}}\" | grep HTTP | grep 200" ) );
-        if ( !result ) {
-            MSG_SHORT = streval( "ERROR: URL '{{{url}}}' not reachable" );
-            return "red";
-        }
+    var result = system( streval( "curl -s -I \"{{{url}}}\" | grep HTTP | grep 200" ) );
+    if ( !result ) {
+        MSG_SHORT = streval( "ERROR: URL '{{{url}}}' not reachable" );
+        return "red";
     }
 
     MSG_SHORT = "OK: all configured hosts are reachable withing limits";
     return "green";
 }
+
 

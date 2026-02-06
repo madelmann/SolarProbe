@@ -8,7 +8,7 @@ import System.String;
 private string COLOR;
 private string DATE;
 private string MSG_SHORT;
-private string PROBE const = "ping";
+private string PROBE const = "conn";
 private int    TIMESTAMP;
 
 private int COUNT const = 1;
@@ -34,7 +34,7 @@ public void Main( int argc, string args )
 private string probeHost( string host )
 {
     if ( !host ) {
-        return "";
+        return "white";
     }
 
     var result = cast<int>( system( streval( "ping -c {{{COUNT}}} -t {{{TTL}}} {{{host}}} 2> /dev/null; echo $?" ) ) );
@@ -46,4 +46,3 @@ private string probeHost( string host )
     MSG_SHORT = "OK: all configured hosts are reachable withing limits";
     return "green";
 }
-

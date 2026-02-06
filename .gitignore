@@ -2,6 +2,7 @@
 config/base.conf
 config/probes.conf
 nodes/*
+tmp/*
 www/*
 
 !.gitignore
