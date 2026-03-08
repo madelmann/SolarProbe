@@ -56,6 +56,10 @@ private void RenderServices( Config config )
 
         foreach ( string probe : probes.second ) {
             try {
+		if ( ! System.IO.File.Exists( streval( "{{{DIRECTORY}}}nodes/{{{host}}}/{{{probe}}}.status" ) ) ) {
+			continue;
+		}
+
                 var probeBodyTpl   = copy bodyProbeTpl;
                 var probeHeaderTpl = copy headerProbeTpl;
 
