@@ -2,6 +2,7 @@
 
 // Library imports
 import FileReader.Scanner;
+import System.IO.File;
 import libJson;
 import libParam;
 
@@ -86,5 +87,8 @@ private void RenderServices( Config config )
     indexTpl.ReplaceAll( "{{{DATE}}}", strftime( "%Y-%m-%dT%H:%M:%S" ) );
     indexTpl.ReplaceAll( "{{{SYSTEMS}}}", systemsStr );
 
-    print( cast<string>( indexTpl ) );
+    // write output to webserver directory
+    var file = new System.IO.File( DIRECTORY + "www/index.html", System.IO.File.AccessMode.WriteOnly );
+    file.write( cast<string>( indexTpl ) );
+    file.close();
 }
