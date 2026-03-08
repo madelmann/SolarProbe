@@ -5,7 +5,8 @@ source "config/base.conf"
 TMPDIR="${TMP}"
 
 # read entire request body
-BODY="$(cat)"
+BODY="$@"
+echo "$BODY"
 
 now=$(date +%s)
 
@@ -35,7 +36,9 @@ echo "$BODY" | while read -r line; do
   tmp="$TMPDIR/$probe.status.$$"
 
   {
-    echo "{ \"state\": \"$state\", \"timestamp\": \"$(date +%s)\", \"summary\": \"$summary\" }"
+    echo "state=$state"
+    echo "timestamp=$now"
+    echo "summary=\"$summary\""
   } > "$tmp"
 
   # atomic rename

@@ -2,28 +2,46 @@
 
 source "config/base.conf"
 
-# Read JSON body (very naive, prototype only)
-body="$(cat)"
+TMPDIR="${TMP}"
 
-node=$(echo "$body" | sed -n 's/.*"node"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
-probe=$(echo "$body" | sed -n 's/.*"probe"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
-state=$(echo "$body" | sed -n 's/.*"state"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
-summary=$(echo "$body" | sed -n 's/.*"summary"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')
+# read entire request body
+BODY="$(cat)"
 
-[ -n "$node" ] || exit 1
-[ -n "$probe" ] || exit 1
+now=$(date +%s)
 
-dir="$NODES/$node"
-file="$dir/$probe.status"
-tmp="$file.$$"
+# iterate over each line
+echo "$BODY" | while read -r line; do
+  # skip empty lines
+  [ -n "$line" ] || continue
 
-mkdir -p "$dir"
+  # parse Xymon client format: node.service color message
+  node_service=$(echo "$line" | awk '{print $1}')
+  state=$(echo "$line" | awk '{print $2}')
+  summary=$(echo "$line" | cut -d' ' -f3-)
 
-{
-  echo "{ \"state\": \"$state\", \"timestamp\": \"$(date +%s)\", \"summary\": \"$summary\" }"
-} > "$tmp"
+  # split node and probe
+  node=${node_service%%.*}
+  probe=${node_service#*.}
 
-mv "$tmp" "$file"
+  [ -n "$node" ] || continue
+  [ -n "$probe" ] || continue
 
+  dir="$NODES/$node"
+  mkdir -p "$dir/history/"
+
+  echo "$(date) $BODY" >> "$NODES/$node/incoming.log"
+
+  file="$dir/$probe.status"
+  tmp="$TMPDIR/$probe.status.$$"
+
+  {
+    echo "{ \"state\": \"$state\", \"timestamp\": \"$(date +%s)\", \"summary\": \"$summary\" }"
+  } > "$tmp"
+
+  # atomic rename
+  mv "$tmp" "$file"
+done
+
+# Return HTTP response
 echo "Status: 204 No Content"
 echo

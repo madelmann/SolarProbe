@@ -1,0 +1,5 @@
+<CENTER>
+{{{HEADER}}}
+
+{{{BODY}}}
+</CENTER>

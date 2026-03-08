@@ -8,6 +8,7 @@ import libParam;
 
 // Project imports
 import libs.Common;
+import libs.Consts;
 
 
 private string DIRECTORY;
@@ -26,12 +27,12 @@ public void Main( int argc, string args )
 
 private void RenderServices( Config config )
 {
-    var bodyProbeTpl   = new String( new Scanner( DIRECTORY + "templates/xymon/body-probe.tpl" ).getText() );
-    var bodyTpl        = new String( new Scanner( DIRECTORY + "templates/xymon/body.tpl" ).getText() );
-    var headerProbeTpl = new String( new Scanner( DIRECTORY + "templates/xymon/header-probe.tpl" ).getText() );
-    var headerTpl      = new String( new Scanner( DIRECTORY + "templates/xymon/header.tpl" ).getText() );
-    var indexTpl       = new String( new Scanner( DIRECTORY + "templates/xymon/index.tpl" ).getText() );
-    var systemTpl      = new String( new Scanner( DIRECTORY + "templates/xymon/system.tpl" ).getText() );
+    var bodyProbeTpl   = new String( new Scanner( DIRECTORY + "templates/body-probe.tpl" ).getText() );
+    var bodyTpl        = new String( new Scanner( DIRECTORY + "templates/body.tpl" ).getText() );
+    var headerProbeTpl = new String( new Scanner( DIRECTORY + "templates/header-probe.tpl" ).getText() );
+    var headerTpl      = new String( new Scanner( DIRECTORY + "templates/header.tpl" ).getText() );
+    var indexTpl       = new String( new Scanner( DIRECTORY + "templates/index.tpl" ).getText() );
+    var systemTpl      = new String( new Scanner( DIRECTORY + "templates/system.tpl" ).getText() );
 
     string systemsStr;
 
@@ -86,6 +87,7 @@ private void RenderServices( Config config )
     indexTpl.ReplaceAll( "{{{COLOR}}}", "green" );
     indexTpl.ReplaceAll( "{{{DATE}}}", strftime( "%Y-%m-%dT%H:%M:%S" ) );
     indexTpl.ReplaceAll( "{{{SYSTEMS}}}", systemsStr );
+    indexTpl.ReplaceAll( "{{{VERSION}}}", VERSION );
 
     // write output to webserver directory
     var file = new System.IO.File( DIRECTORY + "www/index.html", System.IO.File.AccessMode.WriteOnly );
