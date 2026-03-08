@@ -1,0 +1,1 @@
+  <TD ALIGN=CENTER><A HREF="api/svcstatus.sh?HOST={{{HOST}}}&amp;SERVICE={{{PROBE}}}"><IMG SRC="gifs/{{{COLOR}}}.gif" ALT="{{{PROBE}}}:{{{COLOR}}}:nopropagate:132d06h46m" TITLE="{{{PROBE}}}:{{{COLOR}}}:nopropagate:132d06h46m" HEIGHT="16" WIDTH="16" BORDER=0></A></TD>
