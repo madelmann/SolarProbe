@@ -6,7 +6,8 @@ import System.String;
 
 private object StringList extends List<string> implements ICollection
 {
-    public string =operator( string ) const {
+    public string =operator( string ) const
+    {
         var result = "";
         foreach ( string probe : this ) {
             if ( result ) result += ",";
@@ -23,12 +24,14 @@ private object Config
     public Map<string, StringList> Probes;
     public Map<string, StringList> Systems;
 
-    public void Constructor() {
+    public void Constructor()
+    {
         Probes  = new Map<string, StringList>();
         Systems = new Map<string, StringList>();
     }
 
-    public string =operator( string ) const {
+    public string =operator( string ) const
+    {
         string result;
 
         result += "Systems: " + LINEBREAK;

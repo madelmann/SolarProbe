@@ -1,0 +1,9 @@
+o Section 1
+- host1:conn,http,ping
+- host2:conn,http,ping
+- host3:conn,http,ping
+
+o Section x
+- host1:conn,http,ping
+- host2:conn,http,ping
+
