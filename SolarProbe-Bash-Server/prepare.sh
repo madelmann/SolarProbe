@@ -9,5 +9,8 @@ export BASE
 envsubst < ${BASE}/config/base.conf.tmp     > ${BASE}/config/base.conf
 envsubst < ${BASE}/config/probes.conf.tmp   > ${BASE}/config/probes.conf
 
+sudo chmod -R 777 ${BASE}/nodes
+sudo chmod -R 777 ${BASE}/tmp
+
 echo "Done preparing environment."
 
