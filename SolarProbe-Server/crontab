@@ -1,1 +1,1 @@
-*/3 * * * *     /bin/bash -l -c '/var/lib/slang/library/SolarProbe-Server/render.sh'
+*/3 * * * *     /bin/bash -l -c '/var/lib/slang/library/SolarProbe-Server/render.slang'
