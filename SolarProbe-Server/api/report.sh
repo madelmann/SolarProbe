@@ -20,9 +20,7 @@ tmp="$file.$$"
 mkdir -p "$dir"
 
 {
-  echo "state=$state"
-  echo "timestamp=$(date +%s)"
-  echo "summary=\"$summary\""
+  echo "{ \"state\": \"$state\", \"timestamp\": \"$(date +%s)\", \"summary\": \"$summary\" }"
 } > "$tmp"
 
 mv "$tmp" "$file"

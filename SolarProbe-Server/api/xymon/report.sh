@@ -35,9 +35,7 @@ echo "$BODY" | while read -r line; do
   tmp="$TMPDIR/$probe.status.$$"
 
   {
-    echo "state=$state"
-    echo "timestamp=$now"
-    echo "summary=\"$summary\""
+    echo "{ \"state\": \"$state\", \"timestamp\": \"$(date +%s)\", \"summary\": \"$summary\" }"
   } > "$tmp"
 
   # atomic rename

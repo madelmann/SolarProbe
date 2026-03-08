@@ -14,7 +14,7 @@ public void Main( int argc, string args )
     COLOR = process();
     DATE  = strftime( "%Y-%m-%d %H:%M:%S %Z" );
 
-    print( streval( "{{{PROBE}}} {{{COLOR}}} {{{DATE}}} {{{MSG_SHORT}}}" ) );
+    print( streval( "{ \"state\": \"{{{COLOR}}}\", \"timestamp\": {{{TIMESTAMP}}}, \"summary\": \"{{{DATE}}} {{{MSG_SHORT}}}\" }" ) );
 }
 
 private string process()
