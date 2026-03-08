@@ -1,0 +1,9 @@
+#!/bin/bash
+
+BASE="${BASE}"
+NODES="${BASE}/nodes"
+OUT="${BASE}/www/index.html"
+PROBES_CONF="${BASE}/config/probes.conf"
+TMP="${BASE}/tmp"
+WWW="${BASE}/www/nodes"
+

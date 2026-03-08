@@ -1,0 +1,10 @@
+.*
+config/base.conf
+config/probes.conf
+config/systems.conf
+nodes/*
+tmp/*
+www/*
+
+!.gitignore
+

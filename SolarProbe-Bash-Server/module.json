@@ -1,0 +1,11 @@
+{
+  "name": "SolarProbe bash server",
+  "name_short": "SolarProbe-Bash-Server",
+  "version": "0.1.0",
+  "description": "SolarProbe (Bash) is a monitoring tool which probes your servers and services and forwards the collected data to your SolarProbe server.",
+  "dependencies": [],
+  "target": {
+    "directory": "SolarProbe-Bash-Server",
+    "type": "internal"
+  }
+}
