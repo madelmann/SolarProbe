@@ -55,21 +55,23 @@ private void RenderServices( Config config )
         var host = probes.first;
 
         foreach ( string probe : probes.second ) {
-            var probeBodyTpl   = copy bodyProbeTpl;
-            var probeHeaderTpl = copy headerProbeTpl;
+            try {
+                var probeBodyTpl   = copy bodyProbeTpl;
+                var probeHeaderTpl = copy headerProbeTpl;
 
-            var reader = new JsonReader();
-            var value = JsonObject reader.parse( new Scanner( streval( "{{{DIRECTORY}}}nodes/{{{host}}}/{{{probe}}}.status" ) ).getText() );
+                var reader = new JsonReader();
+                var value = JsonObject reader.parse( new Scanner( streval( "{{{DIRECTORY}}}nodes/{{{host}}}/{{{probe}}}.status" ) ).getText() );
 
-            probeBodyTpl.ReplaceAll( "{{{COLOR}}}", value[ "state" ].asString() + "-recent" );
-            probeBodyTpl.ReplaceAll( "{{{HOST}}}",  host );
-            probeBodyTpl.ReplaceAll( "{{{PROBE}}}", probe );
+                probeBodyTpl.ReplaceAll( "{{{COLOR}}}", value[ "state" ].asString() + "-recent" );
+                probeBodyTpl.ReplaceAll( "{{{HOST}}}",  host );
+                probeBodyTpl.ReplaceAll( "{{{PROBE}}}", probe );
 
-            probesBodyStr += cast<string>( probeBodyTpl );
+                probesBodyStr += cast<string>( probeBodyTpl );
 
-            probeHeaderTpl.ReplaceAll( "{{{PROBE}}}", probe );
+                probeHeaderTpl.ReplaceAll( "{{{PROBE}}}", probe );
 
-            probesHeaderStr += cast<string>( probeHeaderTpl );
+                probesHeaderStr += cast<string>( probeHeaderTpl );
+            }
         }
 
         tmpBodyTpl.ReplaceAll( "{{{HOST}}}", host );
