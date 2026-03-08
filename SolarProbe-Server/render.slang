@@ -19,7 +19,7 @@ public void Main( int argc, string args )
 
     DIRECTORY = params.directoryName();
 
-    var config = ParseConfig( new String( new Scanner( DIRECTORY + "config/systems.conf" ).getText() ) );
+    var config = ParseConfig( DIRECTORY );
     // print( cast<string>( config ) );
 
     RenderServices( config );

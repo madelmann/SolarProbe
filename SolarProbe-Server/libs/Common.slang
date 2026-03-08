@@ -4,15 +4,17 @@ import System.String;
 import Types;
 
 
-private object Config
+public object Config
 {
     public Map<string, StringList> Probes;
+    public StringList              ServerProbes;
     public Map<string, StringList> Systems;
 
     public void Constructor()
     {
-        Probes  = new Map<string, StringList>();
-        Systems = new Map<string, StringList>();
+        Probes       = new Map<string, StringList>();
+        ServerProbes = new StringList();
+        Systems      = new Map<string, StringList>();
     }
 
     public string =operator( string ) const
@@ -24,10 +26,16 @@ private object Config
             result += cast<string>( system ) + LINEBREAK;
         }
         result += LINEBREAK;
-    
+
         result += "Probes: " + LINEBREAK;
         foreach ( Pair<string, StringList> probes : Probes ) {
             result += cast<string>( probes ) + LINEBREAK;
+        }
+        result += LINEBREAK;
+
+        result += "ServerProbes: " + LINEBREAK;
+        foreach ( string probe : ServerProbes ) {
+            result += probe + LINEBREAK;
         }
 
         return result;
@@ -35,9 +43,32 @@ private object Config
 }
 
 
-private Config ParseConfig( String config )
+public Config ParseConfig( string directory )
 {
     var cfg = new Config();
+
+    ParseProbeConfig( cfg, directory );
+    ParseSystemConfig( cfg, directory );
+
+    return cfg;
+}
+
+private void ParseProbeConfig( Config cfg, string directory )
+{
+    var config = new String( new Scanner( directory + "config/probes.conf" ).getText() );
+
+    foreach ( string line : config.SplitBy( LINEBREAK ) ) {
+        if ( !line ) {
+            continue;
+        }
+
+        cfg.ServerProbes.push_back( line );
+    }
+}
+
+private void ParseSystemConfig( Config cfg, string directory )
+{
+    var config = new String( new Scanner( directory + "config/systems.conf" ).getText() );
 
     string currentSystem;
     var nodes = new StringList();
@@ -87,6 +118,4 @@ private Config ParseConfig( String config )
     if ( !nodes.empty() ) {
         cfg.Systems.insert( currentSystem, nodes );
     }
-
-    return cfg;
 }
