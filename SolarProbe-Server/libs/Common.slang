@@ -1,23 +1,8 @@
 
-import System.Collections.List;
 import System.Collections.Map;
 import System.String;
+import Types;
 
-
-private object StringList extends List<string> implements ICollection
-{
-    public string =operator( string ) const
-    {
-        var result = "";
-        foreach ( string probe : this ) {
-            if ( result ) result += ",";
-
-            result += probe;
-        }
-
-        return result;
-    }
-}
 
 private object Config
 {
