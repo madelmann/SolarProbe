@@ -4,7 +4,7 @@ set -eu
 source "config/base.conf"
 
 OUT="$WWW/servers.html"
-ICONDIR="templates/xymon"
+ICONDIR="templates"
 
 NOW="$(date)"
 NOW_EPOCH="$(date +%s)"

@@ -17,7 +17,7 @@ while read -r host; do
 
       echo "Probing $probe..."
 
-      ${DIRECTORY}/api/xymon/post.sh "${SERVER}/api/xymon/report.sh" "$host" "${EXTENSION_DIRECTORY}/${probe}"
+      ${DIRECTORY}/api/post.sh "${SERVER}/api/report.sh" "$host" "${EXTENSION_DIRECTORY}/${probe}"
 
     fi
 
