@@ -29,7 +29,7 @@ public void Main( int argc, string args )
 private string probeURL( string url )
 {
     if ( !url ) {
-        return "";
+        return "clear";
     }
 
     var result = system( streval( "curl -s -I \"{{{url}}}\" | grep HTTP | grep 200" ) );

@@ -32,7 +32,7 @@ public void Main( int argc, string args )
 private string probeHost( string host )
 {
     if ( !host ) {
-        return "";
+        return "clear";
     }
 
     var result = cast<int>( system( streval( "ping -c {{{COUNT}}} -t {{{TTL}}} {{{host}}} 2> /dev/null; echo $?" ) ) );
